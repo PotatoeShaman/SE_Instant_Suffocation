@@ -1,5 +1,7 @@
 A simple mod for the game Space Engineers that allows for configurable damage when a character is exposed to the vacuum of space.
 
+Subscribe on the [Steam Workshop Page](https://steamcommunity.com/sharedfiles/filedetails/?id=3298014130) to use this mod.
+
 Increases damage taken in vacuum to 50 by default for vanilla astronauts (Now configurable!). You have about 2 seconds to live if you open your helmet.
 
 All character **DamageAmountAtZeroPressure** values are now individually configurable through the Admin TextHudAPI ModSettings menu *[Alt+F10. Top Left]*. Meaning you can <sub>***hopefully***</sub> change the damage of modded/vanilla NPCs and suits individually. The effect should take place immediately (no reload required).
