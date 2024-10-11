@@ -29,7 +29,7 @@ namespace Suffocation.Menu
         private MyDefinitionManager DefMng;
         private static InstSuffSettingsConfig ConfigData;
 
-        int GlobalZeroPDamageVal;
+        float GlobalZeroPDamageVal;
 
         public PlayerMenu()
         {
@@ -46,7 +46,7 @@ namespace Suffocation.Menu
         public void Register()
         {
             AdminMenu = new MenuRootCategory("Instant Suffocation", MenuRootCategory.MenuFlag.AdminMenu, "Admin Settings");
-            //GlobalZeroPDamageTxt = new MenuTextInput($"Global damage at zero pressure: <color=orange>{GlobalZeroPDamageVal}", AdminMenu, "Set the damage per tick at zero pressure", Global_ZeroPDamage_Submitted);
+            GlobalZeroPDamageTxt = new MenuTextInput($"Global damage at zero pressure: <color=orange>{GlobalZeroPDamageVal}", AdminMenu, "Set the damage per tick for all characters", Global_ZeroPDamage_Submitted);
             CharMenu = new MenuSubCategory($"Individual Characters <color=orange>=>", AdminMenu, "Characters");
             Characters = new Dictionary<string, CharacterTextMenu>();
             foreach (var charDef in DefMng.Characters)
@@ -57,13 +57,12 @@ namespace Suffocation.Menu
 
         internal void Global_ZeroPDamage_Submitted(string input)
         {
-            float num;
-            if(float.TryParse(input, out num))
+            if(float.TryParse(input, out GlobalZeroPDamageVal))
             {
-                GlobalZeroPDamageTxt.Text = $"Global damage at zero pressure: <color=orange>{num}";
+                GlobalZeroPDamageTxt.Text = $"<color=white>Global damage at zero pressure: <color=orange>{GlobalZeroPDamageVal}";
                 foreach (var charDef in DefMng.Characters)
                 {
-                    charDef.DamageAmountAtZeroPressure = num;
+                    charDef.DamageAmountAtZeroPressure = GlobalZeroPDamageVal;
                     Characters[charDef.Id.SubtypeName].menu.Text = $"<color=white>{charDef.Id.SubtypeName}:<color=orange>{charDef.DamageAmountAtZeroPressure}";
                 }
             }
